@@ -1,0 +1,238 @@
+@import url("https://fonts.googleapis.com/css?family=Oswald:300,400,700");
+i[class^="btn"] {
+  font-size: 20px;
+  margin-right: 30px;
+  cursor: pointer;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+ul, li {
+  list-style: none;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+body {
+  margin: 0;
+  background-color: #F2D7D3;
+  font-family: 'Oswald', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 1rem;
+  overflow: hidden;
+  width: 100vw;
+}
+
+@keyframes drift {
+  from {
+    transform: rotate(0deg);
+  }
+  from {
+    transform: rotate(360deg);
+  }
+}
+.bg {
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  height: 50%;
+  background-color: #33476a;
+  z-index: -1;
+}
+
+.text-wrap {
+  position: absolute;
+  width: 100vw;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.text-wrap .text {
+  cursor: pointer;
+  position: relative;
+}
+.text-wrap span {
+  color: #fff9e1;
+  font-size: 100px;
+  font-weight: 300;
+  padding: 0 2%;
+}
+
+.header {
+  position: fixed;
+  left: 2.2vw;
+  top: 2.2vw;
+  margin-left: -4px;
+  margin-top: -6px;
+  color: #252120;
+  z-index: 103;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  height: 30px;
+}
+.header .burger-wrapper {
+  width: 20px;
+  height: 30px;
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+}
+.header .burger {
+  width: 20px;
+  height: 3px;
+  background-color: #252120;
+  position: relative;
+}
+.header .burger:before, .header .burger:after {
+  content: '';
+  width: 20px;
+  height: 3px;
+  background-color: #252120;
+  position: absolute;
+  left: 0;
+}
+.header .burger:before {
+  top: -6px;
+}
+.header .burger:after {
+  top: 6px;
+  width: 14px;
+}
+.header {
+  font-size: 20px;
+  color: #252120;
+}
+
+.nav {
+  will-change: transform;
+  position: fixed;
+  background-color: #fff;
+  width: 50vw;
+  min-width: 500px;
+  height: 100%;
+  z-index: 10;
+  box-shadow: 0 30px 80px 0 rgba(97, 45, 45, 0.25);
+  display: none;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.nav ul {
+  color: #444444;
+}
+.nav ul.nav_main {
+  margin-top: 20vh;
+}
+.nav ul.nav_sub {
+  margin-top: 3vh;
+}
+.nav ul.nav_sub a {
+  font-size: 2.4vw;
+}
+.nav ul li {
+  margin-left: 6vw;
+  margin-bottom: .5vw;
+  position: relative;
+}
+
+.nav_link {
+  font-size: 3.8vw;
+  cursor: pointer;
+}
+.nav_link:before {
+  content: '';
+  position: absolute;
+  width: 4vw;
+  height: 2px;
+  background-color: #444444;
+  left: -12vw;
+  top: 50%;
+  transition: 0.4s;
+}
+
+.nav_divider {
+  width: 3vw;
+  height: 1px;
+  background-color: rgba(37, 33, 32, 0.12);
+  margin: 4vh 6vw;
+}
+
+.nav li .nav_link:hover:before {
+  left: -6vw;
+}
+
+.dim {
+  will-change: opacity;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(37, 33, 32, 0.2);
+  position: fixed;
+  background-color: rgba(224, 221, 209, 0.70196);
+  z-index: 110;
+  display: none;
+  z-index: 2;
+  opacity: 0;
+}
+.content {
+  color: #444444;
+  margin-top:150px;
+  text-align: center;
+}
+.city-name {
+  font-size: 48px;
+  text-transform: uppercase;
+}
+.city-temp {
+  font-size:22px;
+}
+.forecasts {
+  margin-top: 140px;
+  font-size:16px;
+}
+.forecast {
+  margin-top: -30px;
+}
+
+/*medium search field*/
+.textInput{border:1px solid rgba(0,0,0,.15);padding:0 5px;height:35px;font-size:14px;outline:0;background:rgba(221, 221, 221, 0);-webkit-appearance:none;-moz-appearance:none;appearance:none;box-sizing:border-box;border-radius:4px;letter-spacing:0;font-weight:400;font-style:normal}
+.textInputLabel{display:table-cell;vertical-align:middle;height:35px;font-size:14px;box-sizing:border-box;letter-spacing:0;font-style:normal}
+.textInput:invalid{box-shadow:none}
+.textInput--textarea{padding:15px;margin:15px 0 30px;resize:none;width:100%;height:50px;overflow:hidden}
+.textInput--textarea:focus{outline:0}
+.textInput--fullWidth{width:100%}
+.textInput--narrow{width:255px}
+.textInput--width50{width:50px}
+.textInput--large{font-size:18px;height:40px;margin:10px auto;overflow:hidden;padding:7px;width:500px;white-space:nowrap;letter-spacing:0;font-weight:300;font-style:normal}
+.textInput--jumbo{letter-spacing:0;font-weight:300;font-style:normal;font-size:50px;height:80px;padding:0;width:100%}
+.textInput--transparent{background:0 0}
+@media all and (max-width:767px){
+  .textInput--jumbo{font-size:32px;height:50px}
+  .textInput--narrow{width:175px;height:32px;padding:0 10px}}
+.textInput--rounded{border-radius:999em}
+.textInput--transparent{background:0 0}
+.textInput--darkText{color:rgba(0,0,0,.8)}
+.textInput--chromeless{border:0;padding:0;outline:0;height:auto;background:0 0}
+.textInput--underlined{border:0;border-bottom:1px solid rgba(0,0,0,.15);border-radius:0}
+.inputGroup{position:relative}
+.inputGroup .textInput:not(.textInput--narrow){width:100%;box-sizing:border-box}
+.inputGroup--text{text-align:left;width:100%;margin-bottom:10px}
+.inputGroup--text>.inputGroup-title{color:rgba(0,0,0,.44);font-size:14px}
+.inputGroup--text>.textInput{margin:0}
+.inputGroup-description{margin-top:15px;margin-bottom:25px;font-size:16px;color:rgba(0,0,0,.44)}
+.label--radio .inputGroup-description{margin-left:30px}
+.inputGroup .svgIcon{top:-1px;position:relative}
+.metabar .inputGroup.inputGroup--selection{margin-top:15px;margin-bottom:10px;text-align:left}
+.inputGroup--selection .inputGroup-description{position:relative;margin-left:30px;margin-bottom:15px;font-size:12px;color:rgba(0,0,0,.6)}
+.inputGroup--selection .inputGroup-description--last{margin-bottom:0}
+.inputGroup--selection .button--small{margin-top:10px}
+.inputGroup--error>.textInput{border-color:#cc5454}
+.inputGroup--error>.inputGroup-title{color:#cc5454}
+.inputGroup--success>.textInput{border-color:rgba(0,0,0,.15)}
