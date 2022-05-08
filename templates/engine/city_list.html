@@ -1,0 +1,6 @@
+<li> <a class="nav_link" href="#" id="current_city" onclick="AjaxGetCity(my_city);return false">Loading...</a></li>
+<div id="cities">
+{% for city in cities %}
+    <li> <a class="nav_link" href="#" onclick="AjaxGetCity('{{ city }}');return false">{{ city|title }}</a><div style="float:right;margin-right:5%;margin-top:25px" onclick="result = confirm('Do you want delete this city?');if(result == true){AjaxRemoveCity({{city.pk}});$(this).parent().remove();}">X</div></li>
+{% endfor %}
+</div>

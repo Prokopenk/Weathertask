@@ -1,0 +1,109 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="{% static "engine/css/style.css" %}">
+</head>
+
+<script type="text/javascript">
+    var my_city = ""; {# город пользователя #}
+    {# функция определения местоположение пользователя #}
+    navigator.geolocation.getCurrentPosition(function(location) {
+        {# делаем ajax запрос на функцию location_weather для получения погоды в городе пользователя #}
+        $.ajax({
+            url: "{% url 'location_weather' %}",
+            data: {
+                latitude: location.coords.latitude,
+                longitude: location.coords.longitude
+            },
+            success: function(html){
+                $("#text").html(html); {# добавляем в text результат функции #}
+                var city = $('#location_weather_city').attr('data'); {# достаем название города пользователя #}
+                my_city = city;
+                $('#current_city').html('<i class="fa fa-map-marker" aria-hidden="true"></i>   ' + city); {# добавляем в список городов город пользователя #}
+            }
+        });
+    });
+    {# функция получаения погоды для города city #}
+    function AjaxGetCity(city){
+        {# делаем ajax запрос на функуию get_city, которая вернет погоду для города #}
+        $.ajax({
+            url: "{% url 'get_city' %}",
+            data: {
+				city: city
+            },
+            success: function(html){
+                $("#text").html(html); {# вставляем результат (погоду) в text #}
+            }
+        });
+    }
+    {# функция добавления города в список городов #}
+    function AjaxAddCity(city){
+        {# делаем ajax запрос на функцию add_city, которая добавит город в базу и вернет pk добавленного города #}
+        $.ajax({
+            url: "{% url 'add_city' %}",
+            data: {
+				city: city
+            },
+            success: function(html){
+                if (html != "None") { {# если для города city есть погода, тогда добавляем его в писок городов #}
+                    $("#cities").prepend(' <li> <a class="nav_link" href="#" onclick="AjaxGetCity(\''+ city + '\');return false">' + city + '</a><div style="float:right;margin-right:5%;margin-top:25px" onclick="result = confirm(\'Do you want delete this city?\');if(result == true){AjaxRemoveCity(' + html + ');$(this).parent().remove();}">X</div></li>');
+                }
+            }
+        });
+    }
+    {# функция удаления города из списка #}
+    function AjaxRemoveCity(pk){
+        {# делаем ajax запрос на remove_city для удаления города с ключем pk #}
+        $.ajax({
+            url: "{% url 'remove_city' %}",
+            type: 'POST',
+            data: {
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+				pk: pk
+            }
+        });
+    }
+</script>
+
+<body>
+<div class="wrapper">
+    <div class="text-wrap">
+        <div class="text" id="text">Loading...</div>
+    </div>
+    <div class="header">
+        <div class="burger-wrapper">
+            <div class="burger"></div>
+        </div>
+        <div class="logo-text">Cities</div>
+    </div>
+    <div class="nav">
+        <ul class="nav_main" id="nav_main">
+            <form method="POST" class="search-form" id="search" style="width:100%">{% csrf_token %}
+                <input class="js-searchInput textInput textInput--jumbo textInput--underlined u-marginBottom40" type="search" id="searchText" placeholder="ENTER CITY" maxlength="300" style="text-align: center;font-size: 2rem;padding-bottom: -100px; color:#111">
+            </form>
+            {% include "engine/city_list.html" %}
+        </ul>
+    </div>
+    <div class="dim"></div>
+</div>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TimelineMax.min.js'></script>
+<script src="{% static "engine/js/index.js" %}"></script>
+<script>
+    {# функция, которая вызывает функцию добавления города после того, как пользователь ввёл данные в строку поиска #}
+    $(document).ready(function(){
+        $("#search").submit(function(event){
+          event.preventDefault();
+          var searchText = document.getElementById('searchText').value;
+          AjaxAddCity(searchText);
+        });
+    });
+</script>
+
+</body>
+</html>
