@@ -1,0 +1,15 @@
+.idea
+db.sqlite3
+*.jpg
+*.png
+*.pyc
+*.log
+weather/engine/migrations/*
+weather/engine/migrations
+weather/settings.py
+engine/migrations
+weather/media/*
+weather/media
+media/*
+media
+
